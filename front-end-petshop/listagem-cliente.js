@@ -28,7 +28,9 @@ const exibeCliente = (cpf, nome) => {
     return linha;
 };
 
-informacoesClientes.forEach(cliente => {
+listarClientes().then(data => {
+    data.forEach(cliente => {
 
-    tabela.appendChild(exibeCliente(cliente.cpf, cliente.nome));
+        tabela.appendChild(exibeCliente(cliente.cpf, cliente.nome));
+    });
 });
