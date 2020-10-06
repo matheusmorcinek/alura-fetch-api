@@ -1,36 +1,39 @@
-const informacoesClientes = [
-    {
-        cpf: 123456789,
-        nome: "Matheus"
-    },
-    {
-        cpf: 987654321,
-        nome: "Bruna"
-    },
-    {
-        cpf: 654321789,
-        nome: "Maria Fernanda"
-    }
-];
+const removeCliente = (id) => {
+  if(confirm("Deseja deletar o cliente ?")){
+    debugger;
+    deletaCliente(id)
+    window.location.reload()
+  }
+}
 
-const tabela = document.querySelector("[data-tabela]");
+const corpoTabela = document.querySelector("[data-conteudo-tabela]");
 
-const exibeCliente = (cpf, nome) => {
-
+const exibeCliente = (cpf, nome, id) => {
     const linha = document.createElement('tr');
 
     const conteudoLinha = `
     <td>${cpf}</td>
     <td>${nome}</td>
-    `;
-
+    <button type="button" class="btn btn-danger" onclick="removeCliente(${id})">Excluir</button>
+    <a href="edita-clientes.html?id=${id}">
+    <button type=""button class="btn btn-info">Editar</button>
+    </a>
+    
+    
+`
+  
     linha.innerHTML = conteudoLinha;
     return linha;
-};
+  };
+  
+  listarClientes().then( exibe => {
+  exibe.forEach(indice => {
+    corpoTabela.appendChild(exibeCliente(indice.cpf, indice.nome, indice.id))
+  })
+ }
 
-listarClientes().then(data => {
-    data.forEach(cliente => {
+ )
+  
+  
+ 
 
-        tabela.appendChild(exibeCliente(cliente.cpf, cliente.nome));
-    });
-});
